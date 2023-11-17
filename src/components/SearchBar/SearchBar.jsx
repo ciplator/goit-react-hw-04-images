@@ -9,23 +9,21 @@ import {
 } from './SearchBar.styled';
 
 const SearchBar = ({ onSubmit }) => {
-  const [searchName, setSearchName] = useState('');
   const [inputValue, setInputValue] = useState('');
 
-  const handleChange = event => setInputValue(event.target.value);
+  const handleChange = (event) => setInputValue(event.target.value);
 
-  const handleSubmit = event => {
-    event.preventDefault(); // Предотвращаем стандартное поведение формы
-    setSearchName(inputValue.trim()); // Получаем введенный поисковый запрос и удаляем пробелы
-    onSubmit(searchName); // Передаем введенный поисковый запрос родительскому компоненту
-    event.target.reset(); // Сбрасываем значение в поле ввода после отправки формы
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const trimmedValue = inputValue.trim();
+    setInputValue(trimmedValue); // Обновляем значение ввода до обрезанного значения
+    onSubmit(trimmedValue); // Передаем обрезанное значение родительскому компоненту
+    event.target.reset();
   };
 
   return (
     <header>
       <SearchForm onSubmit={handleSubmit}>
-        <a href="https://pixabay.com/" target="_blank" rel="noreferrer">
-        </a>
         <SearchButton>
           <BsSearch />
           <SearchSpan>Search</SearchSpan>
